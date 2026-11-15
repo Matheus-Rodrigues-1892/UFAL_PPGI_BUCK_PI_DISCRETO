@@ -32,8 +32,6 @@ UFAL_PPGI_BUCK_PI_DISCRETO/
 │   ├── Lab_Manual_Buck_P1_Student.pdf    # Manual do aluno - Prática 1
 │   ├── Lab_Manual_Buck_P2_Student.pdf    # Manual do aluno - Prática 2
 │   └── solutions/                        # Gabaritos e resoluções detalhadas (uso restrito)
-├── Tests/
-│   └── test_buck.py                      # Scripts de testes automáticos (opcional)
 ├── LICENSE                               # Licença MIT
 └── README.md                             # Documentação principal do repositório
 
@@ -43,13 +41,13 @@ UFAL_PPGI_BUCK_PI_DISCRETO/
 
 ## 4. Atribuição de Papéis
 
-Conforme as diretrizes da atividade, os membros da equipa assumiram os seguintes papéis e responsabilidades:
+Conforme as diretrizes da atividade, os membros da equipe assumiram os seguintes papéis e responsabilidades:
 
 | Membro | Papel Principal | Contribuições Específicas |
 | --- | --- | --- |
 | **[Nome do Aluno]** | Coordenação & Gestão | Gestão do repositório, cronograma, checklist e contacto institucional. |
-| **[Nome do Aluno]** | Redação | Elaboração dos Manuais do Aluno (Práticas 1 e 2) em inglês. |
-| **[Nome do Aluno]** | Verificação | Execução e validação cega dos manuais e preenchimento dos gabaritos. |
+| **[Nome do Aluno]** | Redação | Elaboração dos Manuais do Aluno (Práticas 1 e 2). |
+| **[Nome do Aluno]** | Verificação | Execução e validação dos manuais e preenchimento dos gabaritos. |
 | **[Nome do Aluno]** | Modelagem | Desenvolvimento do modelo unificado `.tse` no Schematic Editor. |
 | **[Nome do Aluno]** | Painel e Testes | Construção do painel HIL SCADA (`.cus`) e rotinas de teste. |
 | **[Nome do Aluno]** | Projeto Analítico | Desenvolvimento dos cálculos analíticos no Jupyter Notebook (`.ipynb`). |
@@ -61,8 +59,7 @@ Conforme as diretrizes da atividade, os membros da equipa assumiram os seguintes
 Declara-se que ferramentas de Inteligência Artificial (como modelos de linguagem baseados em LLM) foram utilizadas de forma auxiliar no projeto para:
 
 * Auxílio na estruturação textual e revisão gramatical dos manuais em língua inglesa.
-* Consulta de suporte sintático para blocos de programação e scripts de automação.
-* *Nota:* Toda a validação técnica, modelagem matemática, montagem no Typhoon HIL e verificação de resultados foram executadas e auditadas diretamente pelos autores.
+* Consulta de suporte sintático para blocos e componentes do Typhoon HIL (Schematic Editor).
 
 ---
 
