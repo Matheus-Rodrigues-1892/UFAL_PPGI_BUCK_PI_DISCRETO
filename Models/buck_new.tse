@@ -83,13 +83,13 @@ model "buck_new" {
             signs = "+-"
         }
         [
-            position = 8472, 7820
+            position = 7884, 7768
         ]
 
         component "core/Sum" Sum2 {
         }
         [
-            position = 8744, 7804
+            position = 8156, 7752
         ]
 
         component "core/SCADA Input" Reference {
@@ -101,27 +101,27 @@ model "buck_new" {
             unit = ""
         }
         [
-            position = 8256, 7780
+            position = 7668, 7728
         ]
 
         component "core/Gain" P {
             gain = "P"
         }
         [
-            position = 8600, 7796
+            position = 8012, 7744
         ]
 
         component "core/Gain" I {
         }
         [
-            position = 8576, 7860
+            position = 7988, 7808
         ]
 
         component "core/Integrator" Integrator {
             show_reset = "level"
         }
         [
-            position = 8648, 7868
+            position = 8060, 7816
         ]
 
         component "core/Limit" Limit {
@@ -129,7 +129,7 @@ model "buck_new" {
             upper_limit = "1.0"
         }
         [
-            position = 8824, 7804
+            position = 8236, 7752
         ]
 
         component "core/SCADA Input" "PWM Enable" {
@@ -141,14 +141,14 @@ model "buck_new" {
             unit = ""
         }
         [
-            position = 8264, 7924
+            position = 7676, 7872
         ]
 
         component "core/Logical operator" not {
             operator = "NOT"
         }
         [
-            position = 8472, 7924
+            position = 7884, 7872
         ]
 
         component "core/Scope" Scope1 {
@@ -158,6 +158,216 @@ model "buck_new" {
         }
         [
             position = 7760, 8216
+        ]
+
+        component "core/Voltage Source" V_in {
+            init_const_value = "Vs"
+            param_set = ""
+        }
+        [
+            position = 8284, 8296
+            rotation = right
+        ]
+
+        component "core/Inductor" L {
+            inductance = "L"
+        }
+        [
+            position = 8788, 8200
+        ]
+
+        component "core/Capacitor" C {
+            capacitance = "C"
+        }
+        [
+            position = 9012, 8336
+            rotation = right
+        ]
+
+        component "core/Voltage Measurement" V_out {
+            addr = "3"
+            execution_rate = "Ts"
+            sig_output = "True"
+        }
+        [
+            position = 9376, 8292
+            rotation = right
+        ]
+
+        component "core/Voltage Measurement" VL {
+        }
+        [
+            position = 8784, 8140
+        ]
+
+        component "core/Current Measurement" I_in {
+        }
+        [
+            position = 8340, 8200
+        ]
+
+        component "core/Current Measurement" I_out {
+        }
+        [
+            position = 9092, 8200
+        ]
+
+        component "core/IGBT" IGBT {
+            ctrl_src = "Model"
+            model_load_legacy = "1"
+            signal_access = "Inherit"
+            switches_option = "True"
+        }
+        [
+            position = 8560, 8200
+            rotation = left
+        ]
+
+        component "core/Diode" Dm {
+            model_load_legacy = "1"
+            switches_option = "True"
+        }
+        [
+            position = 8660, 8300
+            rotation = left
+        ]
+
+        component "core/Resistor" ESR {
+            resistance = "0.001"
+        }
+        [
+            position = 9012, 8264
+            rotation = right
+        ]
+
+        component "core/SCADA Input" "Step Load (VHIL)" {
+            format = "int"
+            max = "1"
+            min = "-0"
+            signal_type = "int"
+            unit = ""
+        }
+        [
+            position = 9204, 8120
+        ]
+
+        component Subsystem Load {
+            layout = dynamic
+            component "core/Resistor" R_load1 {
+                resistance = "R"
+            }
+            [
+                position = 8152, 8232
+                rotation = right
+            ]
+
+            component "core/Resistor" R_load2 {
+                resistance = "R"
+            }
+            [
+                position = 8232, 8232
+                rotation = right
+            ]
+
+            component "core/Single Pole Single Throw Contactor" S1 {
+                ctrl_src = "Model"
+            }
+            [
+                position = 8232, 8152
+                rotation = right
+            ]
+
+            port - {
+                position = bottom:1
+                kind = pe
+                direction =  out
+            }
+            [
+                position = 8192, 8320
+                rotation = left
+                hide_name = True
+            ]
+
+            port signal {
+                position = right:1
+                kind = sp
+                direction =  out
+                sp_type {
+                    default = auto
+                    readonly = True
+                }
+            }
+            [
+                position = 8296, 8152
+                rotation = down
+            ]
+
+            port + {
+                position = top:1
+                kind = pe
+                direction =  out
+            }
+            [
+                position = 8192, 8064
+                rotation = right
+                hide_name = True
+            ]
+
+            junction Junction50 pe
+            [
+                position = 8192, 8112
+            ]
+
+            junction Junction52 pe
+            [
+                position = 8192, 8272
+            ]
+
+            connect Junction50 + as Connection218
+            connect S1.ctrl_in signal as Connection217
+            connect Junction52 - as Connection216
+            connect R_load2.p_node S1.a_out as Connection192
+            connect R_load1.p_node Junction50 as Connection203
+            connect S1.a_in Junction50 as Connection205
+            connect R_load1.n_node Junction52 as Connection213
+            connect R_load2.n_node Junction52 as Connection215
+        }
+        [
+            position = 9208, 8292
+            size = 80, 64
+        ]
+
+        component "core/SCADA Input" "Step Duty (VHIL)" {
+            format = "int"
+            max = "1"
+            min = "-0"
+            signal_type = "int"
+            unit = ""
+        }
+        [
+            position = 8164, 8696
+        ]
+
+        component "core/Step" "Step Load (Sim)" {
+            execution_rate = "Ts"
+            step_time = "0.012"
+        }
+        [
+            position = 9204, 8048
+        ]
+
+        component "core/Step" "Step Duty (Sim)" {
+            execution_rate = "Ts"
+            step_time = "0.006"
+        }
+        [
+            position = 8268, 8692
+        ]
+
+        component "core/Current Measurement" I_x {
+        }
+        [
+            position = 8936, 8200
         ]
 
         component Subsystem "PWM Modulator" {
@@ -260,198 +470,14 @@ else{s1 = 0;}
             connect portadora.in Junction2 as Connection93
         }
         [
-            position = 8556, 8556
+            position = 9064, 8568
             size = 96, 112
-        ]
-
-        component "core/Voltage Source" V_in {
-            init_const_value = "Vs"
-            param_set = ""
-        }
-        [
-            position = 8384, 8296
-            rotation = right
-        ]
-
-        component "core/Inductor" L {
-            inductance = "L"
-        }
-        [
-            position = 8788, 8200
-        ]
-
-        component "core/Capacitor" C {
-            capacitance = "C"
-        }
-        [
-            position = 9020, 8336
-            rotation = right
-        ]
-
-        component "core/Voltage Measurement" V_out {
-            addr = "3"
-            execution_rate = "Ts"
-            sig_output = "True"
-        }
-        [
-            position = 9384, 8292
-            rotation = right
-        ]
-
-        component "core/Voltage Measurement" VL {
-        }
-        [
-            position = 8784, 8140
-        ]
-
-        component "core/Current Measurement" I_in {
-        }
-        [
-            position = 8440, 8200
-        ]
-
-        component "core/Current Measurement" I_out {
-        }
-        [
-            position = 9100, 8200
-        ]
-
-        component "core/IGBT" IGBT {
-            ctrl_src = "Model"
-            model_load_legacy = "1"
-            signal_access = "Inherit"
-            switches_option = "True"
-        }
-        [
-            position = 8560, 8200
-            rotation = left
-        ]
-
-        component "core/Diode" Dm {
-            model_load_legacy = "1"
-            switches_option = "True"
-        }
-        [
-            position = 8660, 8300
-            rotation = left
-        ]
-
-        component "core/Probe" duty {
-        }
-        [
-            position = 8380, 8640
-            rotation = left
-        ]
-
-        component "core/Resistor" ESR {
-            resistance = "0.001"
-        }
-        [
-            position = 9020, 8264
-            rotation = right
-        ]
-
-        component "core/SCADA Input" "Step Load (VHIL)" {
-            format = "int"
-            max = "1"
-            min = "-0"
-            signal_type = "int"
-            unit = ""
-        }
-        [
-            position = 9212, 8120
-        ]
-
-        component Subsystem Load {
-            layout = dynamic
-            component "core/Resistor" R_load1 {
-                resistance = "R"
-            }
-            [
-                position = 8152, 8232
-                rotation = right
-            ]
-
-            component "core/Resistor" R_load2 {
-                resistance = "R"
-            }
-            [
-                position = 8232, 8232
-                rotation = right
-            ]
-
-            component "core/Single Pole Single Throw Contactor" S1 {
-                ctrl_src = "Model"
-            }
-            [
-                position = 8232, 8152
-                rotation = right
-            ]
-
-            port - {
-                position = bottom:1
-                kind = pe
-                direction =  out
-            }
-            [
-                position = 8192, 8320
-                rotation = left
-                hide_name = True
-            ]
-
-            port signal {
-                position = right:1
-                kind = sp
-                direction =  out
-                sp_type {
-                    default = auto
-                    readonly = True
-                }
-            }
-            [
-                position = 8296, 8152
-                rotation = down
-            ]
-
-            port + {
-                position = top:1
-                kind = pe
-                direction =  out
-            }
-            [
-                position = 8192, 8064
-                rotation = right
-                hide_name = True
-            ]
-
-            junction Junction50 pe
-            [
-                position = 8192, 8112
-            ]
-
-            junction Junction52 pe
-            [
-                position = 8192, 8272
-            ]
-
-            connect Junction50 + as Connection218
-            connect S1.ctrl_in signal as Connection217
-            connect Junction52 - as Connection216
-            connect R_load2.p_node S1.a_out as Connection192
-            connect R_load1.p_node Junction50 as Connection203
-            connect S1.a_in Junction50 as Connection205
-            connect R_load1.n_node Junction52 as Connection213
-            connect R_load2.n_node Junction52 as Connection215
-        }
-        [
-            position = 9216, 8292
-            size = 80, 64
         ]
 
         component "core/Signal switch" "Signal switch1" {
         }
         [
-            position = 8328, 8680
+            position = 8336, 8776
         ]
 
         component "core/Constant" duty_ref {
@@ -459,7 +485,7 @@ else{s1 = 0;}
             value = "0.4167"
         }
         [
-            position = 8200, 8712
+            position = 7904, 8808
         ]
 
         component "core/Constant" duty_step {
@@ -467,76 +493,58 @@ else{s1 = 0;}
             value = "0.5"
         }
         [
-            position = 8200, 8652
+            position = 7904, 8752
         ]
 
-        component "core/SCADA Input" "Step Duty (VHIL)" {
-            format = "int"
-            max = "1"
-            min = "-0"
-            signal_type = "int"
+        component "core/C function" "PI Controller" {
+            arb_defs = "/*Begin code section*/
+
+/*End code section*/"
+            init_fnc = "/*Begin code section*/
+
+/*End code section*/"
+            input_terminals = "real ref;real feedback;"
+            input_terminals_dimensions = "inherit;inherit"
+            input_terminals_feedthrough = "True;True"
+            input_terminals_show_labels = "True;True"
+            output_fnc = "/*Begin code section*/
+erro = ref - feedback;
+
+// TODO
+
+duty = 0;
+/*End code section*/"
+            output_terminals = "real duty;"
+            output_terminals_dimensions = "inherit"
+            output_terminals_feedthrough = "True"
+            output_terminals_show_labels = "True"
+            update_fnc = "/*Begin code section*/
+
+/*End code section*/"
+        }
+        [
+            position = 8292, 8572
+            size = 96, 104
+        ]
+
+        component "core/Rate Transition" "Rate Transition1" {
+            execution_rate = "Tpwm"
+        }
+        [
+            position = 8204, 8604
+        ]
+
+        component "core/Signal switch" "Signal switch2" {
+        }
+        [
+            position = 8592, 8712
+        ]
+
+        component "core/SCADA Input" "selector P1-P2" {
             unit = ""
         }
         [
-            position = 8200, 8584
-        ]
-
-        component "core/Step" "Step Load (Sim)" {
-            execution_rate = "Ts"
-            step_time = "0.012"
-        }
-        [
-            position = 9212, 8048
-        ]
-
-        component "core/Step" "Step Duty (Sim)" {
-            execution_rate = "Ts"
-            step_time = "0.006"
-        }
-        [
-            position = 8200, 8512
-        ]
-
-        component "core/Current Measurement" I_x {
-        }
-        [
-            position = 8944, 8200
-        ]
-
-        tag From2 {
-            value = "reference"
-            scope = global
-            kind = sp
-            direction = out
-        }
-        [
-            position = 8420, 8556
-            hide_name = True
-            size = 60, 20
-        ]
-
-        tag Goto2 {
-            value = "reference"
-            scope = global
-            kind = sp
-            direction = in
-        }
-        [
-            position = 8448, 8680
-            hide_name = True
-            size = 60, 20
-        ]
-
-        tag Goto3 {
-            value = "control"
-            scope = local
-            kind = sp
-            direction = in
-        }
-        [
-            position = 8712, 8556
-            hide_name = True
-            size = 60, 20
+            position = 8540, 8496
         ]
 
         tag From4 {
@@ -546,19 +554,7 @@ else{s1 = 0;}
             direction = out
         }
         [
-            position = 8360, 7836
-            hide_name = True
-            size = 60, 20
-        ]
-
-        tag From5 {
-            value = "control"
-            scope = local
-            kind = sp
-            direction = out
-        }
-        [
-            position = 8500, 8260
+            position = 7772, 7784
             hide_name = True
             size = 60, 20
         ]
@@ -570,14 +566,74 @@ else{s1 = 0;}
             direction = in
         }
         [
-            position = 9468, 8292
+            position = 9460, 8292
+            hide_name = True
+            size = 60, 20
+        ]
+
+        tag From2 {
+            value = "reference"
+            scope = global
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8928, 8568
+            hide_name = True
+            size = 60, 20
+        ]
+
+        tag Goto2 {
+            value = "reference"
+            scope = global
+            kind = sp
+            direction = in
+        }
+        [
+            position = 8748, 8712
+            hide_name = True
+            size = 60, 20
+        ]
+
+        tag Goto3 {
+            value = "control"
+            scope = local
+            kind = sp
+            direction = in
+        }
+        [
+            position = 9208, 8568
+            hide_name = True
+            size = 60, 20
+        ]
+
+        tag From5 {
+            value = "control"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8492, 8264
+            hide_name = True
+            size = 60, 20
+        ]
+
+        tag From6 {
+            value = "vout"
+            scope = local
+            kind = sp
+            direction = out
+        }
+        [
+            position = 8116, 8604
             hide_name = True
             size = 60, 20
         ]
 
         junction Junction16 sp
         [
-            position = 8536, 7820
+            position = 7948, 7768
         ]
 
         junction Junction39 pe
@@ -597,32 +653,32 @@ else{s1 = 0;}
 
         junction Junction44 pe
         [
-            position = 9020, 8400
+            position = 9012, 8400
         ]
 
         junction Junction49 pe
         [
-            position = 9216, 8200
+            position = 9208, 8200
         ]
 
         junction Junction51 pe
         [
-            position = 9216, 8400
-        ]
-
-        junction Junction52 sp
-        [
-            position = 8380, 8680
-        ]
-
-        junction Junction53 pe
-        [
-            position = 8872, 8200
+            position = 9208, 8400
         ]
 
         junction Junction54 pe
         [
-            position = 9020, 8200
+            position = 9012, 8200
+        ]
+
+        junction Junction55 pe
+        [
+            position = 8872, 8200
+        ]
+
+        junction Junction56 sp
+        [
+            position = 7972, 8808
         ]
 
         comment Comment2 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><style type="text/css">p, li { white-space: pre-wrap; }</style></head><body style=" font-family:'Arial'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">Scope component can be found under TyphoonSim category in the core library. </span></p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">Within it you can select the signals to be visualized,</span></p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">then press Start Simulation button and observe the results. </span><span style=" font-size:18pt;">  </span>                </p></body></html> ENDCOMMENT 
@@ -632,29 +688,27 @@ else{s1 = 0;}
 
         comment Comment3 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><meta charset="utf-8" /><style type="text/css">p, li { white-space: pre-wrap; }hr { height: 1px; border-width: 0; }li.unchecked::marker { content: "\2610"; }li.checked::marker { content: "\2612"; }</style></head><body style=" font-family:'Sans'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:18pt;">Buck converter  </span> </p></body></html> ENDCOMMENT 
         [
-            position = 8736, 7984
+            position = 8712, 7976
         ]
 
         connect I.out Integrator.in as Connection10
         connect I.in Junction16 as Connection11
         connect Junction16 P.in as Connection20
         [
-            breakpoints = 8536, 7820; 8536, 7796
+            breakpoints = 7948, 7768; 7948, 7744
         ]
         connect Limit.in Sum2.out as Connection30
         connect P.out Sum2.in as Connection34
         connect Sum1.out Junction16 as Connection37
         connect Sum1.in Reference.out as Connection38
         [
-            breakpoints = 8432, 7780; 8288, 7780
+            breakpoints = 7844, 7728; 7700, 7728
         ]
         connect Sum2.in1 Integrator.out as Connection39
         connect not.out Integrator.reset as Connection47
         connect Sum1.in1 From4 as Connection82
         connect not.in "PWM Enable.out" as Connection83
-        connect From2 "PWM Modulator.ref" as Connection85
         connect V_in.p_node I_in.p_node as Connection105
-        connect IGBT.ctrl_in From5 as Connection119
         connect V_out.out Goto5 as Connection120
         connect I_in.n_node IGBT.D as Connection141
         connect L.p_node Junction39 as Connection142
@@ -675,45 +729,55 @@ else{s1 = 0;}
             breakpoints = 8740, 8400
         ]
         connect Junction44 C.n_node as Connection171
-        connect Goto3 "PWM Modulator.Out1" as Connection188
         connect C.p_node ESR.n_node as Connection190
         connect V_out.p_node Junction49 as Connection200
         connect Junction49 I_out.n_node as Connection201
         [
-            breakpoints = 9204, 8200
+            breakpoints = 9196, 8200
         ]
         connect V_out.n_node Junction51 as Connection210
         connect Junction51 Junction44 as Connection211
         [
-            breakpoints = 9264, 8400; 9204, 8400
+            breakpoints = 9256, 8400; 9196, 8400
         ]
         connect Junction51 Load.- as Connection212
         [
-            breakpoints = 9216, 8400; 9216, 8332
+            breakpoints = 9208, 8400; 9208, 8332
         ]
         connect Junction49 Load.+ as Connection214
-        connect duty.in Junction52 as Connection218
-        connect Junction52 Goto2 as Connection219
-        [
-            breakpoints = 8380, 8680; 8400, 8680
-        ]
-        connect "Signal switch1.out" Junction52 as Connection220
-        connect "Step Load (Sim).out" Load.signal as Connection222
-        connect "Step Duty (Sim).out" "Signal switch1.in2" as Connection223
-        connect duty_step.out "Signal switch1.in" as Connection224
-        connect duty_ref.out "Signal switch1.in1" as Connection225
-        connect VL.n_node Junction53 as Connection228
-        connect Junction53 L.n_node as Connection229
-        [
-            breakpoints = 8872, 8200
-        ]
-        connect I_x.p_node Junction53 as Connection230
         connect I_out.p_node Junction54 as Connection231
         connect Junction54 ESR.p_node as Connection232
         [
-            breakpoints = 9020, 8200
+            breakpoints = 9012, 8200
         ]
         connect I_x.n_node Junction54 as Connection233
+        connect "Step Load (Sim).out" Load.signal as Connection236
+        connect From2 "PWM Modulator.ref" as Connection85
+        connect Goto3 "PWM Modulator.Out1" as Connection188
+        connect duty_step.out "Signal switch1.in" as Connection224
+        connect From5 IGBT.ctrl_in as Connection237
+        connect "Step Duty (Sim).out" "Signal switch1.in2" as Connection238
+        connect "Rate Transition1.out" "PI Controller.feedback" as Connection239
+        connect VL.n_node Junction55 as Connection241
+        connect Junction55 L.n_node as Connection242
+        [
+            breakpoints = 8872, 8200
+        ]
+        connect I_x.p_node Junction55 as Connection243
+        connect From6 "Rate Transition1.in" as Connection244
+        connect "Signal switch2.out" Goto2 as Connection246
+        connect "selector P1-P2.out" "Signal switch2.in2" as Connection247
+        connect "Signal switch1.out" "Signal switch2.in1" as Connection248
+        [
+            breakpoints = 8524, 8776; 8524, 8728
+        ]
+        connect "PI Controller.duty" "Signal switch2.in" as Connection249
+        [
+            breakpoints = 8524, 8572; 8524, 8696
+        ]
+        connect duty_ref.out Junction56 as Connection250
+        connect Junction56 "Signal switch1.in1" as Connection251
+        connect "PI Controller.ref" Junction56 as Connection252
     }
 
     logically_deleted {
