@@ -15,6 +15,8 @@ Thumbs.db
 *.tse.bak
 *.cus.bak
 
+Models/buck_new Target files/
+
 # IDE
 .vscode/
 .idea/
