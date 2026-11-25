@@ -316,13 +316,13 @@ model "buck_new" {
             unit = ""
         }
         [
-            position = 8564, 8488
+            position = 9176, 8468
         ]
 
         component "core/Signal switch" "Signal switch3" {
         }
         [
-            position = 7988, 8836
+            position = 8600, 8816
         ]
 
         component "core/C function" "PI Controller" {
@@ -353,41 +353,41 @@ duty = 0;
 /*End code section*/"
         }
         [
-            position = 8440, 8640
+            position = 9052, 8620
             size = 96, 104
         ]
 
         component "core/Signal switch" "Signal switch4" {
         }
         [
-            position = 8616, 8780
+            position = 9236, 8808
         ]
 
         component "core/Rate Transition" "Rate Transition2" {
             execution_rate = "Tpwm"
         }
         [
-            position = 8308, 8608
+            position = 8920, 8588
         ]
 
         component "core/Rate Transition" "Rate Transition3" {
             execution_rate = "Ts"
         }
         [
-            position = 8536, 8640
+            position = 9148, 8620
         ]
 
         component "core/Rate Transition" "Rate Transition4" {
             execution_rate = "Tpwm"
         }
         [
-            position = 8308, 8672
+            position = 8920, 8652
         ]
 
         component "core/Probe" k_aplicado {
         }
         [
-            position = 8444, 7732
+            position = 8424, 7984
             rotation = left
         ]
 
@@ -402,7 +402,7 @@ duty = 0;
             unit = ""
         }
         [
-            position = 7944, 8324
+            position = 8456, 8608
         ]
 
         component "core/Transport Delay" "Transport Delay1" {
@@ -415,41 +415,41 @@ duty = 0;
         component "core/Digital Probe" start_test_status {
         }
         [
-            position = 8056, 8256
+            position = 8568, 8540
         ]
 
         component "core/SCADA Input" V_initial {
             unit = ""
         }
         [
-            position = 7840, 8868
+            position = 8452, 8848
         ]
 
         component "core/SCADA Input" V_step {
             unit = ""
         }
         [
-            position = 7840, 8804
+            position = 8452, 8784
         ]
 
         component "core/Product" Product1 {
             signs = "*/"
         }
         [
-            position = 8188, 8844
+            position = 8800, 8824
         ]
 
         component "core/Constant" Vin {
             value = "Vs"
         }
         [
-            position = 8096, 8900
+            position = 8708, 8880
         ]
 
         component "core/Probe" V_ref {
         }
         [
-            position = 8076, 8768
+            position = 8688, 8748
             rotation = left
         ]
 
@@ -467,7 +467,7 @@ duty = 0;
         component "core/Constant" Constant1 {
         }
         [
-            position = 8360, 7840
+            position = 8340, 8096
         ]
 
         tag From4 {
@@ -489,7 +489,7 @@ duty = 0;
             direction = out
         }
         [
-            position = 8372, 7796
+            position = 8352, 8052
             hide_name = True
             size = 60, 20
         ]
@@ -501,7 +501,7 @@ duty = 0;
             direction = in
         }
         [
-            position = 8764, 8780
+            position = 9384, 8808
             hide_name = True
             size = 60, 20
         ]
@@ -513,7 +513,7 @@ duty = 0;
             direction = out
         }
         [
-            position = 8196, 8672
+            position = 8808, 8652
             size = 60, 20
         ]
 
@@ -535,7 +535,7 @@ duty = 0;
             direction = in
         }
         [
-            position = 8056, 8324
+            position = 8568, 8608
             size = 60, 20
         ]
 
@@ -557,7 +557,7 @@ duty = 0;
             direction = out
         }
         [
-            position = 7856, 8728
+            position = 8468, 8708
             size = 60, 20
         ]
 
@@ -573,17 +573,12 @@ duty = 0;
 
         junction Junction44 pe
         [
-            position = 9012, 8396
+            position = 9012, 8392
         ]
 
         junction Junction49 pe
         [
             position = 9208, 8200
-        ]
-
-        junction Junction51 pe
-        [
-            position = 9208, 8396
         ]
 
         junction Junction54 pe
@@ -603,22 +598,27 @@ duty = 0;
 
         junction Junction60 sp
         [
-            position = 7992, 8324
-        ]
-
-        junction Junction61 sp
-        [
-            position = 8244, 8844
+            position = 8504, 8608
         ]
 
         junction Junction62 sp
         [
-            position = 8076, 8836
+            position = 8688, 8816
         ]
 
         junction Junction64 sp
         [
-            position = 8444, 7796
+            position = 8424, 8052
+        ]
+
+        junction Junction65 pe
+        [
+            position = 9208, 8392
+        ]
+
+        junction Junction66 sp
+        [
+            position = 8744, 8816
         ]
 
         comment Comment2 START <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"><html><head><meta name="qrichtext" content="1" /><style type="text/css">p, li { white-space: pre-wrap; }</style></head><body style=" font-family:'Arial'; font-size:12pt; font-weight:400; font-style:normal;"><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">Scope component can be found under TyphoonSim category in the core library. </span></p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">Within it you can select the signals to be visualized,</span></p><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:16pt;">then press Start Simulation button and observe the results. </span><span style=" font-size:18pt;">  </span>                </p></body></html> ENDCOMMENT 
@@ -661,18 +661,6 @@ duty = 0;
         [
             breakpoints = 9196, 8200
         ]
-        connect V_out.n_node Junction51 as Connection210
-        [
-            breakpoints = 9376, 8396; 9208, 8396
-        ]
-        connect Junction51 Junction44 as Connection211
-        [
-            breakpoints = 9208, 8396; 9256, 8396; 9256, 8400; 9196, 8396; 9012, 8396
-        ]
-        connect Junction51 Load.- as Connection212
-        [
-            breakpoints = 9208, 8400; 9208, 8332
-        ]
         connect Junction49 Load.+ as Connection214
         connect I_out.p_node Junction54 as Connection231
         connect Junction54 ESR.p_node as Connection232
@@ -691,7 +679,7 @@ duty = 0;
         connect "PI Controller.duty" "Rate Transition3.in" as Connection279
         connect "Rate Transition3.out" "Signal switch4.in" as Connection280
         [
-            breakpoints = 8584, 8640; 8584, 8764
+            breakpoints = 9196, 8620; 9196, 8744
         ]
         connect From8 "Rate Transition4.in" as Connection281
         connect "Rate Transition4.out" "PI Controller.feedback" as Connection282
@@ -703,33 +691,26 @@ duty = 0;
         connect load_step.in Junction59 as Connection305
         connect control_mode.out "Signal switch4.in2" as Connection309
         [
-            breakpoints = 8616, 8488
+            breakpoints = 9228, 8468
         ]
         connect start_test.out Junction60 as Connection314
         connect Junction60 Goto7 as Connection315
         [
-            breakpoints = 8016, 8324
+            breakpoints = 8528, 8608
         ]
         connect start_test_status.in Junction60 as Connection316
         connect Vin.out Product1.in1 as Connection329
+        [
+            breakpoints = 8744, 8880; 8744, 8832
+        ]
         connect V_step.out "Signal switch3.in" as Connection330
         connect V_initial.out "Signal switch3.in1" as Connection331
-        connect "Rate Transition2.in" Junction61 as Connection333
-        [
-            breakpoints = 8244, 8608
-        ]
-        connect Junction61 "Signal switch4.in1" as Connection334
-        [
-            breakpoints = 8540, 8844; 8540, 8796
-        ]
-        connect Product1.out Junction61 as Connection335
         connect "Signal switch3.out" Junction62 as Connection337
-        connect Junction62 Product1.in as Connection338
         connect V_ref.in Junction62 as Connection339
         connect From2 Junction64 as Connection344
         connect Junction64 k_aplicado.in as Connection345
         [
-            breakpoints = 8444, 7796
+            breakpoints = 8424, 8052
         ]
         connect Buck1.In Junction64 as Connection346
         connect Constant1.out Buck1.En as Connection347
@@ -749,6 +730,22 @@ duty = 0;
         [
             breakpoints = 8740, 8392; 8660, 8392
         ]
+        connect Junction44 Junction65 as Connection362
+        [
+            breakpoints = 9200, 8392
+        ]
+        connect Junction65 V_out.n_node as Connection363
+        [
+            breakpoints = 9376, 8392
+        ]
+        connect Load.- Junction65 as Connection364
+        connect Product1.out "Signal switch4.in1" as Connection369
+        [
+            breakpoints = 8856, 8824
+        ]
+        connect Junction62 Junction66 as Connection370
+        connect Junction66 Product1.in as Connection371
+        connect "Rate Transition2.in" Junction66 as Connection372
     }
 
     logically_deleted {
