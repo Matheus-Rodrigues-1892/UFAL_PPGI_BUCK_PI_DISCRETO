@@ -313,6 +313,7 @@ model "buck_new" {
         ]
 
         component "core/SCADA Input" control_mode {
+            execution_rate = "Ts"
             unit = ""
         }
         [
@@ -327,22 +328,48 @@ model "buck_new" {
 
         component "core/C function" "PI Controller" {
             arb_defs = "/*Begin code section*/
-
+double integral;
 /*End code section*/"
-            execution_rate = "Tpwm"
+            execution_rate = "Tsw"
             init_fnc = "/*Begin code section*/
-
+integral = 0.4167; // Inicia próximo ao duty nominal (5V / 12V) para partida suave
 /*End code section*/"
             input_terminals = "real ref;real feedback;"
             input_terminals_dimensions = "inherit;inherit"
             input_terminals_feedthrough = "True;True"
             input_terminals_show_labels = "True;True"
             output_fnc = "/*Begin code section*/
-float erro = ref - feedback;
+// Parâmetros do controlador PI discreto
+const double Ts = 40e-6;
+const double Kp = 0.025;
+const double Ki = 25.0;
+const double u_min = 0.0;
+const double u_max = 0.95;
 
-// TODO
+// 1. Cálculo do erro em Volts
+double erro = ref - feedback;
 
-duty = 0;
+// 2. Ação proporcional e candidato à ação integral (Backward Euler)
+double P = Kp * erro;
+double integral_cand = integral + (Ki * Ts * erro);
+double u_cand = P + integral_cand;
+
+// 3. Saturação com Anti-Windup (Clamping)
+if (u_cand > u_max) {
+    duty = u_max;
+    // Só integra se o erro ajudar a sair da saturação
+    if (erro < 0.0) {
+        integral = integral_cand;
+    }
+} else if (u_cand < u_min) {
+    duty = u_min;
+    if (erro > 0.0) {
+        integral = integral_cand;
+    }
+} else {
+    duty = u_cand;
+    integral = integral_cand;
+}
 /*End code section*/"
             output_terminals = "real duty;"
             output_terminals_dimensions = "inherit"
@@ -364,7 +391,7 @@ duty = 0;
         ]
 
         component "core/Rate Transition" "Rate Transition2" {
-            execution_rate = "Tpwm"
+            execution_rate = "Tsw"
         }
         [
             position = 8920, 8588
@@ -378,7 +405,7 @@ duty = 0;
         ]
 
         component "core/Rate Transition" "Rate Transition4" {
-            execution_rate = "Tpwm"
+            execution_rate = "Tsw"
         }
         [
             position = 8920, 8652
@@ -399,6 +426,7 @@ duty = 0;
         ]
 
         component "core/SCADA Input" start_test {
+            execution_rate = "Ts"
             unit = ""
         }
         [
@@ -419,6 +447,7 @@ duty = 0;
         ]
 
         component "core/SCADA Input" V_initial {
+            execution_rate = "Ts"
             unit = ""
         }
         [
@@ -426,6 +455,7 @@ duty = 0;
         ]
 
         component "core/SCADA Input" V_step {
+            execution_rate = "Ts"
             unit = ""
         }
         [
@@ -440,6 +470,7 @@ duty = 0;
         ]
 
         component "core/Constant" Vin {
+            execution_rate = "Ts"
             value = "Vs"
         }
         [
@@ -465,6 +496,7 @@ duty = 0;
         ]
 
         component "core/Constant" Constant1 {
+            execution_rate = "Ts"
         }
         [
             position = 8340, 8096
@@ -1100,9 +1132,10 @@ duty = 0;
         # To get the model file path, use 'mdl.get_model_file_path()'
         # To print information to the console, use info()
         
-        Ts = 100e-6
+        Ts = 120e-6
         Tpwm = 1e-6
         fsw = 25000
+        Tsw = 40e-6
         
         #P = 0.6*0.01
         #I = 0.6*0.002/0.5/0.0055
